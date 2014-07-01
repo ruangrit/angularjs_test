@@ -96,16 +96,6 @@ describe('Controller: CalculatorCtrl', function () {
     expect(scope.inputTextArray[0]).toBe(123);
   });
 
-  it('เมื่อมีการเปลี่ยนจาก operation เป็นตัวเลข จะเก็บ operation ไว้ใน operationArray ', function () {
-
-    scope.number(1);
-    scope.number(2);
-    scope.number(3);
-    scope.setOperator('+');
-    scope.number(1);
-    expect(scope.operatorArray[0]).toBe('+');
-  });
-
   it('กดปุ่ม enter เรียก function calulate ถ้ายังมีชุดตัวเลขสุดท้ายให้เอาไปใส่ใน  inputTextArray ท้ายสุด', function () {
 
     scope.number(1);
@@ -117,27 +107,33 @@ describe('Controller: CalculatorCtrl', function () {
     expect(scope.inputTextArray[1]).toBe(1);
   });
 
+  it('กด 123+456 แล้ว enter เรียก function calculate ค่า dispayText จะเป็น 579', function () {
+    scope.number(1);
+    scope.number(2);
+    scope.number(3);
+    scope.setOperator('+');
+    scope.number(4);
+    scope.number(5);
+    scope.number(6);
+    scope.calculate();
+    expect(scope.displayText).toBe(579);
+  })
 
 
-  it('ถ้ากด 123 และ +, -, *, + และ 456 และ + จะได้ค่า inputText[123, 456] และ operator = + ', function () {
-    // scope.number(1);
-    // scope.number(2);
-    // scope.number(3);
 
 
-    // scope.setOperator('-');
-    // scope.setOperator('*');
-    // scope.setOperator('+');
-    // expect(scope.operator).toBe('+');
-
-    // expect(scope.inputTextArray[0]).toBe(123);
-
-    // scope.number(4);
-    // scope.number(5);
-    // scope.number(6);
-
-    // scope.setOperator('+');
-    // expect(scope.inputTextArray[1]).toBe(456);
+  it('มีตัวแปร displayText เพื่อไว้แสดงในช่อง input ค่าเริ่มต้นเป็นว่างๆ', function () {
+    expect(scope.displayText).toBe('');
+  });
+  it('เมื่อกด 123+456 displayText  ต้องเท่ากับ 123+456', function () {
+    scope.number(1);
+    scope.number(2);
+    scope.number(3);
+    scope.setOperator('+');
+    scope.number(4);
+    scope.number(5);
+    scope.number(6);
+    expect(scope.displayText).toBe('123+456');
   });
 
 

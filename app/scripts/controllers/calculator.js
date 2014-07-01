@@ -9,20 +9,26 @@
  */
 angular.module('calculatorApp')
   .controller('CalculatorCtrl', function ($scope) {
+  	$scope.test = 'xxxx';
   	var tempInput = [];
-  	$scope.inputTextArray = [];
-  	$scope.operatorArray = [];
-    $scope.number = function (input) {
-    	if (typeof($scope.operator) != 'undefined' ) {
-   	    	$scope.operatorArray.push($scope.operator);
+  	$scope.number_btn = [];
+  	for (var i = 0; i <= 9; i++) {
+  		$scope.number_btn.push(i);
+  	
+  	};
 
-    	}
+  	
+  	$scope.inputTextArray = [];
+  	$scope.displayText = '';
+    $scope.number = function (input) {
+    	$scope.displayText += input;
     	tempInput.push(input);
     	$scope.inputText =  parseInt(tempInput.join(''));	
     };
 
     $scope.setOperator = function (operator) {
     	$scope.operator = operator;
+    	$scope.displayText += operator;
     	if (tempInput.length == 0) {
     		$scope.errorOperation = true;
     		
@@ -31,7 +37,9 @@ angular.module('calculatorApp')
     		$scope.inputTextArray.push($scope.inputText);
     		$scope.inputText = "";
     		tempInput = [];
+    		
     	}
+    	
     }
 
     $scope.calculate = function () {
@@ -39,6 +47,19 @@ angular.module('calculatorApp')
     		$scope.inputTextArray.push($scope.inputText);
     		$scope.inputText = "";
     		tempInput = [];
+    	}
+
+    	if($scope.operator == '+') {
+    		$scope.displayText = (parseInt($scope.inputTextArray[0]) + parseInt($scope.inputTextArray[1]));
+    	}
+    	if($scope.operator == '-') {
+    		$scope.displayText = (parseInt($scope.inputTextArray[0]) - parseInt($scope.inputTextArray[1]));
+    	}
+    	if($scope.operator == '*') {
+    		$scope.displayText = (parseInt($scope.inputTextArray[0]) * parseInt($scope.inputTextArray[1]));
+    	}
+    	if($scope.operator == '/') {
+    		$scope.displayText = (parseInt($scope.inputTextArray[0]) / parseInt($scope.inputTextArray[1]));
     	}
     };
 

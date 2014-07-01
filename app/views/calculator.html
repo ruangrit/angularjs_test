@@ -1,0 +1,12 @@
+{{ displayText }}
+<div  ng-repeat="n in number_btn" class="number-btn">
+	<button ng-click="number(n)"> {{ n }}</button>
+</div>
+<div class="operator">
+	<button ng-click="setOperator('+')">+</button>
+	<button ng-click="setOperator('-')">-</button>
+	<button ng-click="setOperator('*')">x</button>
+	<button ng-click="setOperator('/')">/</button>
+	
+	<button ng-click="calculate()">Enter</button>
+</div>
